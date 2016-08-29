@@ -1,4 +1,6 @@
 """
+    Based on: http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/
+    Comments resceived: https://gist.github.com/petrklus/b1f427accdf7438606a6
     Original pseudo code:
     
     Set Temperature = Temperature \ 100
@@ -108,15 +110,16 @@ def convert_K_to_RGB(colour_temperature):
     
 
 
-    
-from matplotlib import pyplot as plt
+if __name__ == "__main__":
+    print("Preview requires matplotlib")
+    from matplotlib import pyplot as plt
 
-step_size = 100
-for i in range(0, 15000, step_size):
-    color = convert_K_to_RGB(i)
-    plt.plot((i, i), (0, 1), linewidth=step_size/2.0, linestyle="-", color=map(lambda div: div/255.0, color))
+    step_size = 100
+    for i in range(0, 15000, step_size):
+        color = list(map(lambda div: div/255.0, convert_K_to_RGB(i))) + [1]
+        print(color)
+        plt.plot((i, i), (0, 1), linewidth=step_size/2.0, linestyle="-", color=color)
     
-plt.show()  
-
+    plt.show()  
 
 
